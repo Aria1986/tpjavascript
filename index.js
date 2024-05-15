@@ -29,9 +29,11 @@ $(document).ready(function(){
             picsJson.forEach(pic=>{
                 console.log(pic.url)
             $("#galerie").append(`<div class="col">
-            <div class="card">
-            <img class="card-img-top" src="${pic.url}"/>
-            <p class="card-text"> ${pic.description}</p>
+            <div class="card shadow">
+                <img class="card-img-top" src="${pic.url}"/>
+                <div class="card-body">
+                    <p class="card-text"> ${pic.description}</p>
+                </div>
             </div></div>`)
             })  
             }  
