@@ -2,27 +2,39 @@
 
     const url = "https://photos-api-sepia.vercel.app/photos";
 
-    //functions
+//functions
     //envoyer une photo à l'API
-    async function postPics(url, data){
-        try{
-           
+    async function postPics(){
+        try{    
+            const urlPhoto= $('#file').val()
+            const description = $("#description").val()
+            const data={
+                "description": description,
+                "url": urlPhoto
+            }
+            console.log(data)
             const response = await fetch(url,{
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json", 
                 }, 
+                body: JSON.stringify(data), 
             });
            
             if(!response.ok){
                 throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            
+            }          
         }
         catch (error) {
             console.error('Erreur lors de la récupération des données', error);
         }
     }
+    $("#uploadPic").submit(function(e){
+        e.preventDefault();
+       
+        postPics()
+    })
+
 
 // récupérer photos correspondant à la recherche 
     async function getKeywordPics(){
@@ -54,12 +66,12 @@
         catch (error) {
             console.error('Erreur lors de la récupération des données', error);
         }
-}
-
-$("#btnSearch").click(function(event) {
-    event.preventDefault(); 
-    getKeywordPics(); 
-  });
+    }
+    //lancer la recherche par mot clef au clic du bouton recherche
+    $("#btnSearch").click(function(event) {
+        event.preventDefault(); 
+        getKeywordPics(); 
+    });
 
 
 
@@ -96,29 +108,27 @@ $("#btnSearch").click(function(event) {
     });
 
 //charger une photo depuis un pc
-    $("#fileInput").change(function(e){
-        const selectedFile = e.target.files[0];
-        $("#uploadPic").submit(function() {
-            const reader = new FileReader();
-            reader.onload = function(event) {
-            const fileContent = event.target.result;
-            if (selectedFile) {
-                // Get the image URL
-                const fileURL = URL.createObjectURL(selectedFile);
-                // Use the fileURL for further processing or display
-                console.log("Image URL:", fileURL);
-              }
+    // $("#fileInput").change(function(e){
+    //     const selectedFile = e.target.files[0];
+    //     $("#uploadPic").submit(function() {
+    //         const reader = new FileReader();
+    //         reader.onload = function(event) {
+    //         const fileContent = event.target.result;
+    //         if (selectedFile) {
+    //             // Get the image URL
+    //             const fileURL = URL.createObjectURL(selectedFile);
+    //             // Use the fileURL for further processing or display
+    //             console.log("Image URL:", fileURL);
+    //           }
            
-            };
-            reader.readAsDataURL(selectedFile);
-        });
-    });
+    //         };
+    //         reader.readAsDataURL(selectedFile);
+    //     });
+    // });
 
 
 
 $(document).ready(function(){
-    //application des fonctions
- getPics();
+    getPics();
  
-
 })

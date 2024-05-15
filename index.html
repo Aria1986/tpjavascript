@@ -29,13 +29,20 @@
             </button>
            
         </form>
-    <form id="uploadPic" enctype="multipart/form-data" >
+    <!-- <form id="uploadPic" enctype="multipart/form-data" >
         <label for="formFileMultiple" class="form-label">Télécharger une photo</label>
         <input class="form-control form-control-sm" type="file" id="fileInput" enctype="multipart/form-data">
         <label class="form-label" for="description">ajouter une description de la photo</label>
         <textarea class="form-control mb-1" type="text" id="description"></textarea>
         <button class="btn btn-success" type="submit">Upload Photo</button>
-    </form>
+    </form> -->
+        <form id="uploadPic">
+            <label for="file" class="form-label">Télécharger une photo</label>
+            <input type="text" id="file" teaxtarea="https://www.adresse/photo.jpg">
+            <label class="form-label" for="description">ajouter une description de la photo</label>
+            <textarea class="form-control mb-1" type="text" id="description"></textarea>
+            <button class="btn btn-success" type="submit">Upload Photo</button>
+        </form>
     </div>
     <div class="container">
     <div id="galerie" class=" m-auto row row-cols-1 row-cols-md-2 
