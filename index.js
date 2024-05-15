@@ -20,7 +20,10 @@
                 }, 
                 body: JSON.stringify(data), 
             });
-           
+            $('#file').empty()
+            $("#description").empty()
+            getPics();
+
             if(!response.ok){
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }          
@@ -29,11 +32,7 @@
             console.error('Erreur lors de la récupération des données', error);
         }
     }
-    $("#uploadPic").submit(function(e){
-        e.preventDefault();
-       
-        postPics()
-    })
+   
 
 
 // récupérer photos correspondant à la recherche 
@@ -56,6 +55,7 @@
                 <img class="card-img-top" src="${pic.url}"/></a>
                 <div class="card-body">
                     <p class="card-text"> ${pic.description}</p>
+                    <button onclick="deletePic(${pic.id})">Supprimer</button>
                 </div>
             </div></div>`)
             })  
@@ -89,6 +89,7 @@
                 <img class="card-img-top" src="${pic.url}"/></a>
                 <div class="card-body">
                     <p class="card-text"> ${pic.description}</p>
+                    <button onclick="deletePic(${pic.id})">Supprimer</button>
                 </div>
             </div></div>`)
             })  
@@ -96,6 +97,24 @@
         catch (error) {
             console.error('Erreur lors de la récupération des données', error);
         }
+    }
+
+    async function deletePic(id){
+        console.log('delete'+ id)
+        console.log(`${url}/:${id}`)
+        const data = { "id": id };
+        const options = {
+            method: 'DELETE',      
+            }
+    
+        try{
+            const response = await fetch(`${url}/${id}`,options)
+            const responseData = await response.json();
+            console.log('Data deleted successfully:', responseData);
+        } catch (error) {
+          console.error('Error deleting data:', error);
+        }
+          
     }
 
 //    agrandir photo en cliquant dessus 
@@ -107,6 +126,12 @@
       });
     });
 
+    //ajouter une photo et l'afficher dans la galerie
+    $("#uploadPic").submit(function(e){
+        e.preventDefault();     
+        postPics()
+        getPics()
+    })
 //charger une photo depuis un pc
     // $("#fileInput").change(function(e){
     //     const selectedFile = e.target.files[0];
@@ -130,5 +155,6 @@
 
 $(document).ready(function(){
     getPics();
- 
+    $('#file').empty()
+    $("#description").empty()
 })
