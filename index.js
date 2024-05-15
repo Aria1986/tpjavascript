@@ -1,4 +1,5 @@
-$(document).ready(function(){
+
+
     const url = "https://photos-api-sepia.vercel.app/photos";
 
     //functions
@@ -23,6 +24,45 @@ $(document).ready(function(){
         }
     }
 
+// récupérer photos correspondant à la recherche 
+    async function getKeywordPics(){
+        let keyword = $("#search").val()
+        try{
+            console.log(`${url}?description={${keyword}}`)
+            const response = await fetch(`${url}?description={${keyword}}`)
+            if (!response){
+                console.log("il n'y a pas de resultats correpondants")
+            }
+            
+            const picsJson = await response.json()
+            $("#galerie").empty()
+            picsJson.forEach(pic=>{
+                console.log(pic.url)
+            $("#galerie").append(`<div class="col">
+            <div class="card shadow">
+                <a href="${pic.url}" data-lightgallery="image-set" class="gallery-item">
+                <img class="card-img-top" src="${pic.url}"/></a>
+                <div class="card-body">
+                    <p class="card-text"> ${pic.description}</p>
+                </div>
+            </div></div>`)
+            })  
+            if(!response.ok){
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            }  
+        catch (error) {
+            console.error('Erreur lors de la récupération des données', error);
+        }
+}
+
+$("#btnSearch").click(function(event) {
+    event.preventDefault(); 
+    getKeywordPics(); 
+  });
+
+
+
 
     //récupérer et afficher toutes les photos de l'API
     async function getPics(){
@@ -46,6 +86,7 @@ $(document).ready(function(){
         }
     }
 
+//    agrandir photo en cliquant dessus 
    $(document).ready(function() {
       $('#galerie').lightGallery({
         thumbnail: true,
@@ -73,8 +114,11 @@ $(document).ready(function(){
         });
     });
 
-//application des fonctions
-getPics()
 
+
+$(document).ready(function(){
+    //application des fonctions
+ getPics();
+ 
 
 })
