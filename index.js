@@ -20,9 +20,7 @@
                 }, 
                 body: JSON.stringify(data), 
             });
-            $('#file').empty()
-            $("#description").empty()
-            getPics();
+            $('#uploadPic')[0].reset()
 
             if(!response.ok){
                 throw new Error(`HTTP error! Status: ${response.status}`);
@@ -155,6 +153,4 @@
 
 $(document).ready(function(){
     getPics();
-    $('#file').empty()
-    $("#description").empty()
 })
