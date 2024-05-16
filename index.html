@@ -20,14 +20,13 @@
 <body>
    
     <div class="container mt-4 ">
-        <form  class="input-group">
+        <form id="formSearch" class="input-group">
             <div class="form-outline" >
               <input type="search" id="search" class="form-control" />     
             </div>
-            <button id="btnSearch" type="submit"  class="btn btn-primary" data-mdb-ripple-init>
+            <button id="btnSearch" type="submit"  class="btn btn-primary" >
                 chercher
-            </button>
-           
+            </button>         
         </form>
     <!-- <form id="uploadPic" enctype="multipart/form-data" >
         <label for="formFileMultiple" class="form-label">Télécharger une photo</label>
@@ -43,6 +42,9 @@
             <textarea  class="form-control mb-1" type="text" id="description" required></textarea>
             <button class="btn btn-success" type="submit">Upload Photo</button>
         </form>
+        <div class="text-center">
+            <button onclick="getPics()" >afficher toutes les photos</button>
+        </div>
     </div>
     <div class="container">
     <div id="galerie" class=" m-auto row row-cols-1 row-cols-md-2 
