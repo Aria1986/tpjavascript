@@ -20,8 +20,11 @@
 <body>
    
     <div class="container mt-4 ">
-        <form id="formSearch" class="input-group">
-            <div class="form-outline" >
+        <h1 class="text-center mb-5">Collection de photos</h1>
+        
+        <form id="formSearch" class="input-group m-3">
+            <label for="search">Recherche par mot clé: &nbsp</label>
+            <div class="form-outline" >       
               <input type="search" id="search" class="form-control" />     
             </div>
             <button id="btnSearch" type="submit"  class="btn btn-primary" >
@@ -35,9 +38,10 @@
         <textarea class="form-control mb-1" type="text" id="description"></textarea>
         <button class="btn btn-success" type="submit">Upload Photo</button>
     </form> -->
-        <form id="uploadPic">
-            <label for="file" class="form-label">Télécharger une photo</label>
-            <input class="form-control type="text" id="file" teaxtarea="https://www.adresse/photo.jpg">
+    <i class="fa fa-download m-1 btn" onclick="ouvrirUploadPic()"></i>Charger une photo
+        <form id="uploadPic" class="col-md-4 m-3  d-none">
+            <label for="file" class="form-label">Télécharger votre photo</label>
+            <input class="form-control" type="text" id="file" teaxtarea="https://www.adresse/photo.jpg">
             <label class="form-label" for="description">ajouter une description de la photo</label>
             <textarea  class="form-control mb-1" type="text" id="description" required></textarea>
             <button class="btn btn-success" type="submit">Upload Photo</button>

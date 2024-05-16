@@ -1,6 +1,12 @@
 const url = "https://photos-api-sepia.vercel.app/photos";
 
 //functions
+
+//ouvrir champ chargement photo
+function ouvrirUploadPic(){
+    $('#uploadPic').removeClass('d-none').addClass('d-block');
+}
+
 //envoyer une photo à l'API
 async function postPics() {
   try {
