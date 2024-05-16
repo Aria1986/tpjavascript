@@ -24,7 +24,8 @@ async function postPics() {
       body: JSON.stringify(data),
     });
     $("#uploadPic")[0].reset();
-
+    $('#galerie').empty()
+    getPics();
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
@@ -36,7 +37,6 @@ async function postPics() {
 // récupérer photos correspondant à la recherche
 async function getKeywordPics() {
   let keyword = $("#search").val();
-  console.log(keyword);
   try {
     const response = await fetch(`${url}/search?description=${keyword}`);
     if (!response) {
@@ -62,7 +62,6 @@ $("#btnSearch").click(function (event) {
 
 //afficher  cartes d'images
 function showListPics(pics) {
-    console.log(pics.length)
   pics.forEach((pic) => {
     $("#galerie").append(`<div class="col">
         <div class="card shadow">
@@ -100,8 +99,9 @@ async function deletePic(id) {
 
   try {
     const response = await fetch(`${url}/${id}`, options);
-    const responseData = await response.json();
-    console.log("Data deleted successfully:", responseData);
+    console.log("Data deleted successfully:", response);   
+    $('#galerie').empty()
+    getPics()
   } catch (error) {
     console.error("Error deleting data:", error);
   }
@@ -111,6 +111,7 @@ async function getPic(id) {
   try {
     const response = await fetch(`${url}/${id}`);
     const responseData = await response.json();
+    console.log(pics.length)
     return responseData;
   } catch (error) {
     console.error("Error deleting data:", error);
@@ -143,6 +144,8 @@ async function modifyDescription(id, urlPic) {
     const response = await fetch(`${url}/${id}`, options);
     const responseData = await response.json();
     console.log("Data modify successfully:", responseData);
+    $('#galerie').empty()
+    getPics()
   } catch (error) {
     console.error("Error modifying data:", error);
   }
@@ -183,5 +186,5 @@ $("#uploadPic").submit(function (e) {
 // });
 
 $(document).ready(function () {
-  getPics();
+ getPics(); 
 });
